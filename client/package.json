@@ -5,11 +5,14 @@
   "repository": "https://github.com/Steven-Zajac/FinalProject.git",
   "author": "Steven <zajac.steve.26@gmail.com>",
   "license": "MIT",
+  "private": true,
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "styled-components": "^6.1.8"
   },
   "scripts": {
     "start": "react-scripts start"
