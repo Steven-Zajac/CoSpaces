@@ -5,7 +5,7 @@ import { useParams, Link } from "react-router-dom";
 
 import useFetch from "../hooks/useFetch";
 
-import Loading from "../global/Loading";
+import Loading from "../Global/Loading";
 
 const RegistrationConfirmation = () => {
 

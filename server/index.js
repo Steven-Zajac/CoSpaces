@@ -14,6 +14,7 @@ const {
     deleteReservation,
     getReservations,
     getReservation,
+    getUserReservations,
     postReservation,
     putReservation
 } = require('./handlers');
@@ -47,11 +48,12 @@ express()
     .put('/users/:userId', putUser) // Update user information (Eventually create a password only EP)
 
     // Reservations
-    .delete('/reservations/:reservationId', deleteReservation)
-    .get('/reservations', getReservations)
-    .get('/reservations/:reservationId', getReservation)
+    .delete('/reservations/:resId', deleteReservation)
+    .get('/reservations', getReservations) // Get all reservations
+    .get('/reservations/:userId', getUserReservations) // Get all res for a userId
+    .get('/reservation/:resId', getReservation) // Get res by resId
     .post('/reservations', postReservation)
-    .put('/reservations/:reservationId', putReservation)
+    .put('/reservations/:resId', putReservation)
     // CATCH ALL
     .get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}))
 

@@ -4,24 +4,24 @@ require('dotenv').config();
 
 const { MONGO_URI } = process.env;
 
-// This will retrieve a specific reservation by reservation ID
-const getReservation = async(req, res) => {
+// Retrieves all reservations for specified userId
+const getUserReservations = async (req, res) => {
 
-    const { resId } = req.params;
+    const { userId } = req.params;
     const client = new MongoClient(MONGO_URI);
     try {
         await client.connect();
         const db = client.db('CoSpaces');
-        const reservation = await db.collection('reservations').findOne({ _id: resId });
-
-        reservation ? 
+        const reservations = await db.collection('reservations').find({ 'userId': userId }).toArray();
+        
+        reservations ?
         res.status(200).json({
             status: 200,
-            data: reservation
+            data: reservations
         }) :
         res.status(404).json({
             status: 404,
-            message: 'No reservation found'
+            message: "No reservations for specified user found."
         })
     } catch (error) {
         res.status(500).json({status: 500, message: error.message});
@@ -30,4 +30,4 @@ const getReservation = async(req, res) => {
     }
 };
 
-module.exports = getReservation;
+module.exports = getUserReservations;

@@ -10,6 +10,7 @@ const putUser = require('./handlers/User/putUser');
 const deleteReservation = require('./handlers/Reservation/deleteReservation');
 const getReservations = require('./handlers/Reservation/getReservations');
 const getReservation = require('./handlers/Reservation/getReservation');
+const getUserReservations = require('./handlers/Reservation/getUserReservations');
 const postReservation = require('./handlers/Reservation/postReservation');
 const putReservation = require('./handlers/Reservation/putReservation');
 
@@ -22,6 +23,7 @@ module.exports = {
     deleteReservation,
     getReservations,
     getReservation,
+    getUserReservations,
     postReservation,
     putReservation
 };
