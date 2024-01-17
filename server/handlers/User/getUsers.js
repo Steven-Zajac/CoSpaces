@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
     try {
         await client.connect();
         const db = client.db('CoSpaces');
-        const users = await db.collection('registered_users').find().toArray();
+        const users = await db.collection('users').find().toArray();
 
         users ?
         res.status(200).json({

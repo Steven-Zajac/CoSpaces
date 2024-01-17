@@ -1,28 +1,27 @@
-"use strict";
+"user strict";
 
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb");
 require('dotenv').config();
-
 const { MONGO_URI } = process.env;
 
-// Get a user based on their User ID
-const getUser = async (req, res) => {
+// Retrieves the availabilities for specific location
+const getAvailabilities = async (req, res) => {
 
-    const { userId } = req.params;
+    const { location } = req.params;
     const client = new MongoClient(MONGO_URI);
     try {
         await client.connect();
         const db = client.db('CoSpaces');
-        const user = await db.collection('users').findOne({ _id: userId });
+        const availabilities = await db.collection('availabilities').find({ _id: location }).toArray();
 
-        user ?
+        (availabilities.length) ?
         res.status(200).json({
             status: 200,
-            data: user
+            data: availabilities
         }) :
         res.status(404).json({
             status: 404,
-            message: 'No user found'
+            message: "No location data found"
         })
     } catch (error) {
         res.status(500).json({status: 500, message: error.message});
@@ -31,4 +30,4 @@ const getUser = async (req, res) => {
     }
 };
 
-module.exports = getUser;
+module.exports = getAvailabilities;

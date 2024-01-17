@@ -30,8 +30,8 @@ const addUser = async (req, res) => {
 
         await client.connect();
         const db = client.db('CoSpaces');
-        const emailExists = await db.collection('registered_users').findOne({ email: userData.email });
-        const phoneExists = await db.collection('registered_users').findOne({ phone: userData.phone });
+        const emailExists = await db.collection('users').findOne({ email: userData.email });
+        const phoneExists = await db.collection('users').findOne({ phone: userData.phone });
         
         // Ensures that phone number or email is not already in system
         if (emailExists || phoneExists) {
@@ -41,7 +41,7 @@ const addUser = async (req, res) => {
             })
             return;
         }
-        const pushRes = await db.collection('registered_users').insertOne(userData);
+        const pushRes = await db.collection('users').insertOne(userData);
         if (!pushRes.insertedId) {
             res.status(404).json({
                 status: 404,

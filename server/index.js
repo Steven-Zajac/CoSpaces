@@ -10,13 +10,14 @@ const {
     getUsers,
     getUser,
     postUser,
-    putUser,
+    patchUser,
     deleteReservation,
     getReservations,
     getReservation,
     getUserReservations,
     postReservation,
-    putReservation
+    putReservation,
+    getAvailabilities,
 } = require('./handlers');
 
 
@@ -45,7 +46,7 @@ express()
     .get('/users', getUsers) // retrieve all users
     .get('/users/:userId', getUser) // retrieve single user
     .post('/users', postUser) // Add a new user
-    .put('/users/:userId', putUser) // Update user information (Eventually create a password only EP)
+    .patch('/users/:userId', patchUser) // Update user information (Eventually create a password only EP)
 
     // Reservations
     .delete('/reservations/:resId', deleteReservation)
@@ -54,6 +55,10 @@ express()
     .get('/reservation/:resId', getReservation) // Get res by resId
     .post('/reservations', postReservation)
     .put('/reservations/:resId', putReservation)
+
+    // Availabilities
+    .get('/availabilities/:location', getAvailabilities) // retrieve availabilities for specific location
+
     // CATCH ALL
     .get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}))
 

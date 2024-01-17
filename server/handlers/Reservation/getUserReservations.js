@@ -14,7 +14,7 @@ const getUserReservations = async (req, res) => {
         const db = client.db('CoSpaces');
         const reservations = await db.collection('reservations').find({ 'userId': userId }).toArray();
         
-        reservations ?
+        (reservations.length) ?
         res.status(200).json({
             status: 200,
             data: reservations
@@ -31,3 +31,4 @@ const getUserReservations = async (req, res) => {
 };
 
 module.exports = getUserReservations;
+
