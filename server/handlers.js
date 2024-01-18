@@ -12,7 +12,7 @@ const getReservations = require('./handlers/Reservation/getReservations');
 const getReservation = require('./handlers/Reservation/getReservation');
 const getUserReservations = require('./handlers/Reservation/getUserReservations');
 const postReservation = require('./handlers/Reservation/postReservation');
-const putReservation = require('./handlers/Reservation/putReservation');
+const patchReservation = require('./handlers/Reservation/patchReservation');
 
 // Availabilities
 const getAvailabilities = require('./handlers/Availabilities/getAvailabilities');
@@ -28,6 +28,6 @@ module.exports = {
     getReservation,
     getUserReservations,
     postReservation,
-    putReservation,
+    patchReservation,
     getAvailabilities,
 };

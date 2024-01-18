@@ -16,7 +16,7 @@ const {
     getReservation,
     getUserReservations,
     postReservation,
-    putReservation,
+    patchReservation,
     getAvailabilities,
 } = require('./handlers');
 
@@ -45,16 +45,16 @@ express()
     .delete('/users/:userId', deleteUser) // Delete user data
     .get('/users', getUsers) // retrieve all users
     .get('/users/:userId', getUser) // retrieve single user
-    .post('/users', postUser) // Add a new user
     .patch('/users/:userId', patchUser) // Update user information (Eventually create a password only EP)
+    .post('/users', postUser) // Add a new user
 
     // Reservations
     .delete('/reservations/:resId', deleteReservation)
     .get('/reservations', getReservations) // Get all reservations
     .get('/reservations/user/:userId', getUserReservations) // Get all res for a userId
     .get('/reservations/res/:resId', getReservation) // Get res by resId
+    .patch('/reservations/:resId', patchReservation)
     .post('/reservations', postReservation)
-    .put('/reservations/:resId', putReservation)
 
     // Availabilities
     .get('/availabilities/:location', getAvailabilities) // retrieve availabilities for specific location
