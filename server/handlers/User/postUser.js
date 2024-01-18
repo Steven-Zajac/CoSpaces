@@ -9,7 +9,7 @@ require('dotenv').config();
 const { MONGO_URI } = process.env;
 
 // Adds a new user to the collection
-const addUser = async (req, res) => {
+const postUser = async (req, res) => {
     const userData = { _id: uuidv4().slice(0,8), ...req.body }; // Create user data object
     const userValues = Object.values(userData); // Extract only the values to usee later
     const client = new MongoClient(MONGO_URI);
@@ -37,15 +37,15 @@ const addUser = async (req, res) => {
         if (emailExists || phoneExists) {
             res.status(409).json({
                 status: 409,
-                message: "Email or phone number already registered"
+                message: "Email or phone number already registered."
             })
             return;
         }
-        const pushRes = await db.collection('users').insertOne(userData);
-        if (!pushRes.insertedId) {
+        const addUser = await db.collection('users').insertOne(userData);
+        if (!addUser.insertedId) {
             res.status(404).json({
                 status: 404,
-                message: "There has been an error with your registration"
+                message: "Error adding user to database."
             })
         } else {
             res.status(200).json({
@@ -60,4 +60,4 @@ const addUser = async (req, res) => {
     }
 };
 
-module.exports = addUser;
+module.exports = postUser;

@@ -51,8 +51,8 @@ express()
     // Reservations
     .delete('/reservations/:resId', deleteReservation)
     .get('/reservations', getReservations) // Get all reservations
-    .get('/reservations/:userId', getUserReservations) // Get all res for a userId
-    .get('/reservation/:resId', getReservation) // Get res by resId
+    .get('/reservations/user/:userId', getUserReservations) // Get all res for a userId
+    .get('/reservations/res/:resId', getReservation) // Get res by resId
     .post('/reservations', postReservation)
     .put('/reservations/:resId', putReservation)
 

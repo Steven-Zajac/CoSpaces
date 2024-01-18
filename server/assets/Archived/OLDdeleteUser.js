@@ -26,23 +26,9 @@ const deleteUser = async (req, res) => {
 
         // Check if any existing reservations
         const userReservations = await db.collection('reservations').find({ 'userId': userId }).toArray();    
-        // Case: User has no reservations, we can delete user. 
-        if (!userReservations.length) {
-            const deletedUser = await db.collection('users').deleteOne({ _id: userId });
-            if (!deletedUser.deletedCount) {
-                res.status(404).json({
-                    status: 404,
-                    message: "Error deleting user"
-                })
-            } else {
-                res.status(204).json({
-                    status: 204,
-                    message: "User data deleted"
-                })
-            }
-        } else { 
+        // Case: if reservations, we must increase availabilities and delete reservations
+        if (userReservations.length) {
             let modified = 0; // To compare how many res were modified
-            // Iterates and updates availabilities that were used up by user
             for (const obj of userReservations) {          
                 const query = { 
                     "_id": obj.location,
@@ -52,36 +38,49 @@ const deleteUser = async (req, res) => {
                 const updatedAvailability = await db.collection('availabilities').updateOne(query, toUpdate);
                 updatedAvailability.modifiedCount && (modified += 1)
             }
-            // Case: Not all availabilities were modified
-            if (userReservations.length !== modified) {
-                res.status(409).json({
-                    status: 409,
-                    data: modified,
-                    message: "Error updating availabilities."
-                })
-            } else {
+            // Availabilities were modified, proceed with deletion of reservations
+            if (userReservations.length === modified) {
                 const deletedRes = await db.collection('reservations').deleteMany({ 'userId': userId});
-                // Case: Not all reservations were deleted
-                if (userReservations.length !== deletedRes.deletedCount){
-                    res.status(409).json({
-                        status: 409,
-                        message: "Error deleting all user reservations"
-                    })
-                } else {
+                // Reservations & Availabilities updates, now delete user
+                if (userReservations.length === deletedRes.deletedCount) {
                     const deletedUser = await db.collection('users').deleteOne({ _id: userId });
-                    // Case: User data was not deleted
-                    if (!deletedUser.deletedCount) {
-                        es.status(404).json({
-                            status: 404,
-                            message: "Error deleting user data"
-                        })
-                    } else {
+                    if (deletedUser.deletedCount) {
                         res.status(204).json({
                             status: 204,
                             message: "User data deleted"
                         })
-                    } 
+                    } else {
+                        res.status(404).json({
+                            status: 404,
+                            message: "Error deleting user data"
+                        })
+                    }
+                } else {
+                    res.status(409).json({
+                        status: 409,
+                        message: "Error deleting reservations"
+                    })
                 }
+            } else {
+                res.status(409).json({
+                    status: 409,
+                    data: modified,
+                    message: "Error updating availabilities collection."
+                })
+            }
+        } else {
+            // Case: user has no reservations, we can delete user (this will be the else)
+            const deletedUser = await db.collection('users').deleteOne({ _id: userId });
+            if (deletedUser.deletedCount) {
+                res.status(204).json({
+                    status: 204,
+                    message: "User data deleted"
+                })
+            } else {
+                res.status(404).json({
+                    status: 404,
+                    message: "Error deleting user data"
+                })
             }
         }
     } catch (error) {
