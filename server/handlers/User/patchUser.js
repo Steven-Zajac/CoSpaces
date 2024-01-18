@@ -39,7 +39,6 @@ const patchUser = async (req, res) => {
         await client.connect();
         const db = client.db('CoSpaces');
         const updatedUser = await db.collection('users').updateOne({ _id: userId }, { $set: userData });
-        console.log(updatedUser)
         if (!updatedUser.matchedCount) {
             res.status(404).json({
                 status: 404,

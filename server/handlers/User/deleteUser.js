@@ -57,7 +57,7 @@ const deleteUser = async (req, res) => {
                 res.status(409).json({
                     status: 409,
                     data: modified,
-                    message: "Error updating availabilities."
+                    message: "Unable to delete user. Unable to modify all availabilities."
                 })
             } else {
                 const deletedRes = await db.collection('reservations').deleteMany({ 'userId': userId});
@@ -71,7 +71,7 @@ const deleteUser = async (req, res) => {
                     const deletedUser = await db.collection('users').deleteOne({ _id: userId });
                     // Case: User data was not deleted
                     if (!deletedUser.deletedCount) {
-                        es.status(404).json({
+                        res.status(404).json({
                             status: 404,
                             message: "Error deleting user data"
                         })
