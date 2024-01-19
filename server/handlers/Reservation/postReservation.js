@@ -44,6 +44,16 @@ const postReservation = async (req, res) => {
         ];
 
         const isAvailable = await db.collection('availabilities').aggregate(pipeline).toArray();
+
+        // Case: If no match found with pipeline
+        if (!isAvailable.length) {
+            res.status(409).json({
+                status: 409,
+                message: "No availabilities found."
+            })
+            return;
+        }
+
         const numAvailable = isAvailable[0].available // grab the value for available
         // Case: Not enough spaces available
         if (numAvailable <= 0) {

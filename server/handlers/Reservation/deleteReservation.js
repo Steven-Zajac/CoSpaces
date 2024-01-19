@@ -24,7 +24,6 @@ const deleteReservation = async(req, res) => {
             return;
         }
 
-        
         // Update availabilities collection before deleting reservation
         const query = {
             _id: resExists.location,
