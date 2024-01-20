@@ -8,6 +8,7 @@ const RegistrationForm = () => {
     const [formData, setFormData] = useState({});
     const navigate = useNavigate(); // Want to use this to redirect user to registration confirmation page 
 
+    
     const handleChange = (e) => {
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
@@ -24,7 +25,7 @@ const RegistrationForm = () => {
                 if (submitResult.status === 200) {
                     await navigate(`/register/${submitResult.data}`);
                 } else {
-                    console.log('Error processing user registration')
+                    throw new Error ('Error processing reservation')
                 }
             } catch (error) {
                 console.error(`Error: ${error}`);

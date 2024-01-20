@@ -15,7 +15,10 @@ const postReservation = require('./handlers/Reservation/postReservation');
 const patchReservation = require('./handlers/Reservation/patchReservation');
 
 // Availabilities
-const getAvailabilities = require('./handlers/Availabilities/getAvailabilities');
+const getAvailabilities = require('./handlers/getAvailabilities');
+
+// Login
+const postLogin = require('./handlers/postLogin');
 
 module.exports = {
     deleteUser,
@@ -30,4 +33,5 @@ module.exports = {
     postReservation,
     patchReservation,
     getAvailabilities,
+    postLogin,
 };

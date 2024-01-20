@@ -10,9 +10,9 @@ const passwordHash = async (password) => {
         const hashedPassword = await bcrypt.hash(password, salt);
         return hashedPassword;
     } catch (error) {
-        console.error('Error hashing password:', error);
+        throw new Error(`Error hashing password: ${error.message}`);
     }
-}
+};
 
 module.exports = passwordHash;
 

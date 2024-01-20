@@ -18,6 +18,7 @@ const {
     postReservation,
     patchReservation,
     getAvailabilities,
+    postLogin,
 } = require('./handlers');
 
 
@@ -58,6 +59,9 @@ express()
 
     // Availabilities
     .get('/availabilities/:location', getAvailabilities) // retrieve availabilities for specific location
+
+    // Login 
+    .post('/login', postLogin)
 
     // CATCH ALL
     .get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}))
