@@ -73,8 +73,9 @@ const postLogin = async (req, res) => {
                 message: "Invalid password"
             })
         } else {
+            // token will be used for later authentication (stretch)
             const token = jsonWebTkn.sign({ userId: user._id }, process.env.JWT_SECRETKEY, { expiresIn: '1h' });
-            console.log(jsonWebTkn.verify(token, process.env.JWT_SECRETKEY))
+            //console.log(jsonWebTkn.verify(token, process.env.JWT_SECRETKEY))
             res.status(200).json({
                 status: 200,
                 data: [token, user._id]

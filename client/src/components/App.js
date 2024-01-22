@@ -13,6 +13,9 @@ import {
 //const userId = JSON.parse(localStorage.getItem('userId'));
 //console.log(userId)
 
+// if user is not logged in or no userId in local storage, 
+// then redirect to login page for any of the component 
+
 
 const App = () => {
     return (
@@ -24,7 +27,7 @@ const App = () => {
                 <Route path='/register/:userId' element={<RegistrationConfirmation />}/>
                 <Route path='/login' element={<LoginForm />}/>
                 {/*<Route />*/}
-                {/*<Route />*/}
+                {/*<Route />*/} 
                 {/*<Route />*/}
                 <Route path='*' element={<RaiseError />}/>
             </Routes>
