@@ -1,18 +1,13 @@
-import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-
+import useFormData from "../hooks/useFormData";
+import handleUserLoggedIn from "../handlers/handleUserLoggedIn";
 import handleSubmit from "../handlers/handleSubmit";
 
 const RegistrationForm = () => {
-
-    const [formData, setFormData] = useState({});
+    const [ formData, handleChange ] = useFormData({})
     const navigate = useNavigate(); // Want to use this to redirect user to registration confirmation page 
 
-    
-    const handleChange = (e) => {
-        const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
-    };
+    handleUserLoggedIn();
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -21,18 +16,17 @@ const RegistrationForm = () => {
         } else {
             delete formData['passwordCheck']; // Don't need to keep doubles of the password
             try {
-                const submitResult = await handleSubmit(formData);
-                if (submitResult.status === 200) {
-                    await navigate(`/register/${submitResult.data}`);
+                const result = await handleSubmit(formData, '/users');
+                if (result.status === 200) {
+                    await navigate(`/register/${result.data}`);
                 } else {
-                    throw new Error ('Error processing reservation')
+                    window.alert(result.message);
+                    location.reload();
                 }
             } catch (error) {
-                console.error(`Error: ${error}`);
+                throw error;
             }
         }
-
-
     };
 
     return ( 

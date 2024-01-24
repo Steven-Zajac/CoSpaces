@@ -1,46 +1,27 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import handleUserLoggedIn from '../handlers/handleUserLoggedIn';
 import handleSubmit from '../handlers/handleSubmit';
-//import handleChange from '../handlers/handleChange';
+import useFormData from '../hooks/useFormData';
 
 const LoginForm = () => {
-    const [formData, setFormData] = useState({});
+    const [ formData, handleChange ] = useFormData({})
     const navigate = useNavigate();
 
-    
-    const handleChange = (e) => {
-        const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
-    };
+    handleUserLoggedIn();
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("/login", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
-            }
-            const result = await response.json();
+            const result = await handleSubmit(formData, '/login');
             if (result.status === 200) {
-                console.log(result.data[1])
-
-                // figure out a way that if this works, then we want to assign or store this value
-                // somewhere an d
-
-                // Must also delete local storage once the user logs out. 
-
-                localStorage.setItem('userId', result.data[1]);
-
+                // Stores userId in local storage. Will use token for better security
+                localStorage.setItem('userId', result.data[1]); 
+                window.alert('Success!');
+                // Navigate to user Dashboard
+                await navigate(`/home/${result.data[1]}`)
             } else {
-                throw new Error (`Error: ${result.status}`)
+                window.alert(result.message);
+                location.reload(); // Want to reload the page and empty values if password invalid
             }
         } catch (error) {
             throw error;
