@@ -22,8 +22,9 @@ const NavBar = () => {
                     ) : 
                     (
                         <>
-                            <NavLink to='/'>Home</NavLink>
-                            <NavLink to={`/home/${userId}`}>Dashboard</NavLink>
+                            <NavLink to={`/user/${userId}/home`}>Home</NavLink>
+                            <NavLink to={`/reservations/user/${userId}`}>Reservations</NavLink>
+                            <NavLink to={`/user/${userId}/details`}>My Info</NavLink>
                             <button onClick={logout}>Logout</button>
                             {/* Can add a reservations tab and a user data tab */}
                         </>
@@ -54,8 +55,9 @@ const NavBar = () => {
                     ) :
                     (
                         <>
-                            <NavLink to='/'>Home</NavLink>
-                            <NavLink to={`/home/${userId}`}>Dashboard</NavLink>
+                            <NavLink to={`/user/${userId}/home`}>Home</NavLink>
+                            <NavLink to={`/reservations/user/${userId}`}>Reservations</NavLink>
+                            <NavLink to={`/user/${userId}/details`}>My Info</NavLink>
                             <button onClick={logout}>Logout</button>
                             {/* Can add a reservations tab and a user data tab */}
                         </>

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import useFormData from "../hooks/useFormData";
 import handleUserLoggedIn from "../handlers/handleUserLoggedIn";
-import handleSubmit from "../handlers/handleSubmit";
+import handlePostSubmit from "../handlers/handlePostSubmit";
 
 const RegistrationForm = () => {
     const [ formData, handleChange ] = useFormData({})
@@ -16,7 +16,7 @@ const RegistrationForm = () => {
         } else {
             delete formData['passwordCheck']; // Don't need to keep doubles of the password
             try {
-                const result = await handleSubmit(formData, '/users');
+                const result = await handlePostSubmit(formData, '/users');
                 if (result.status === 200) {
                     await navigate(`/register/${result.data}`);
                 } else {
@@ -32,8 +32,6 @@ const RegistrationForm = () => {
     return ( 
         <div>
             <form onSubmit={handleFormSubmit}>
-                <h1>New User Registration</h1>
-                
                 <div>
                     <label htmlFor="fname">First Name: </label>
                     <input type="text" id="fname" onChange={handleChange} placeholder="Joan" required></input>

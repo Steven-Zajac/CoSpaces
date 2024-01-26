@@ -1,9 +1,8 @@
-// Handles the submission of the registration form data. ** might be used for more submissions*
-
-const handleSubmit = async (formData, uri) => {
+// Used to PATCH user or reservation data
+const handlePatchSubmit = async (formData, uri) => {
     try {
-            const response = await fetch(uri, {
-            method: "POST",
+        const response = await fetch(uri, {
+            method: "PATCH",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -13,8 +12,8 @@ const handleSubmit = async (formData, uri) => {
         const result = await response.json();
         return result;
     } catch (error) {
-        throw error; 
+        throw error;
     }
 };
 
-export default handleSubmit;
+export default handlePatchSubmit;

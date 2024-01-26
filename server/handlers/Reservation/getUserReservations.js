@@ -14,14 +14,9 @@ const getUserReservations = async (req, res) => {
         const db = client.db('CoSpaces');
         const reservations = await db.collection('reservations').find({ 'userId': userId }).toArray();
         
-        (reservations.length) ?
         res.status(200).json({
             status: 200,
             data: reservations
-        }) :
-        res.status(404).json({
-            status: 404,
-            message: "No reservations for specified user found."
         })
     } catch (error) {
         res.status(500).json({status: 500, message: error.message});

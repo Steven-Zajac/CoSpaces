@@ -22,6 +22,7 @@ const patchUser = async (req, res) => {
         }
     });
 
+    /*
     // Case: nothing to be changed
     if (!Object.keys(userData).length) {
         res.status(204).json({
@@ -29,11 +30,11 @@ const patchUser = async (req, res) => {
             message: "No user data to modify"
         })
         return;
-    }
+    };*/
 
     const client = new MongoClient(MONGO_URI);
     try {
-        // New password? -> encrypt.  
+        // New password? -> encrypt.  for later use
         ('password' in userData) && (userData['password'] = await passwordHash(userData.password));
 
         await client.connect();
