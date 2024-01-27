@@ -34,14 +34,10 @@ const UserHome = () => {
         }
     }, [isLoading]);
     
-    //console.log(reservations)
     // Sorts reservations is fetch is done and reservations are present
     const sortedReservations = (isFetchDone && reservations) && reservations.sort((a,b) => new Date(a.date) - new Date(b.date));
     // if reservation(s) are there then it will grab the date info                           
     const date = sortedReservations.length ? new Date(sortedReservations[0].date) : false ;
-
-    console.log(data)
-    
     
     return (
         <>

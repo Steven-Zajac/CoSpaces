@@ -20,7 +20,6 @@ const UserData = () => {
     const profileDelete = useUserDeletionHandler();
     const logout = useLogout();
 
-    console.log(formData)
     // Toggles whether we are in edit more or not. 
     const toggleEditMode = () => {
         setIsEditMode(!isEditMode); 

@@ -1,6 +1,7 @@
 
 import Loading from "./Global/Loading";
 import LoginRegister from "./Authentication/LoginRegister";
+import ModifyReservation from "./Reservation/ModifyReservation";
 import NavBar from "./Global/NavBar";
 import NewReservation from "./Reservation/NewReservation";
 import RaiseError from "./Global/RaiseError";
@@ -14,6 +15,7 @@ import UserHome from "./UserData/UserHome";
 export {
     Loading,
     LoginRegister,
+    ModifyReservation,
     NavBar,
     NewReservation,
     RaiseError,

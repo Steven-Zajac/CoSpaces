@@ -11,8 +11,7 @@ const LoginRegister = () => {
     const toggleRegister = () => {
         setIsRegister(!isRegister); 
     };
-    console.log(isRegister)
-
+    
     // Want to toggle between registration and logging in
     // Also bolden the text depending on toggle register
 

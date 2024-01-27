@@ -2,7 +2,7 @@ import handleDeleteReservation from "../handlers/handleDeleteReservation";
 
 const SingleReservation = ({ resData }) => {
 
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    //const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const locations = {
         'downtown': 'CoSpaces Downtown Montreal',
@@ -12,7 +12,7 @@ const SingleReservation = ({ resData }) => {
     // Parse date data
     const date = new Date(resData.date);
     const day = date.getDate();
-    const month = months[date.getMonth()];
+    const month = date.toLocaleString('default', { month: 'long' });
     const year = date.getFullYear();
 
     return (
@@ -20,7 +20,9 @@ const SingleReservation = ({ resData }) => {
             <ul>
                 <div>Date: {month} {day}, {year}</div>
                 <div>Location: {locations[resData.location]}</div>
-                <button>Modify</button>
+                <a href={`/reservations/modify/${resData._id}`} rel="noopener noreferrer">
+                    <button>Modify</button>
+                </a>
                 <button onClick={() => handleDeleteReservation(resData._id)}>Delete</button>
             </ul>
         </div>

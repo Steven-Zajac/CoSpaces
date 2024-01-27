@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Loading from "../Global/Loading";
 import CalendarReservation from "./CalendarReservation";
 import LocationSelect from "./LocationSelect";
 
 import handleNoUser from "../handlers/handleNoUser";
-import handlePostSubmit from "../handlers/handlePostSubmit";
+import handlePatchSubmit from "../handlers/handlePatchSubmit";
 import useFetch from "../hooks/useFetch";
 import useCalendarData from "../hooks/useCalendarData";
 
-
-const NewReservation = () => {
+const ModifyReservation = () => {
 
     handleNoUser();
     const userId = localStorage.getItem('userId');
+    const { resId } = useParams();
     const navigate = useNavigate();
-    const [ formData, location, handleDrop, handleChangeDate ] = useCalendarData(true, userId)
-    const { isLoading, data } = useFetch('/locations');
+    const [ formData, location, handleDrop, handleChangeDate ] = useCalendarData(false)
+    const { isLoading: isLoadingRes, data: dataRes } = useFetch(`/reservations/res/${resId}`);
+    const { isLoading: isLoadingLoc, data: dataLoc } = useFetch('/locations');
     const [availabilities, setAvailabilities] = useState(null);
     const [isFetchDone, setIsFetchDone] = useState(false);
 
@@ -25,6 +26,13 @@ const NewReservation = () => {
         'downtown': 'Downtown Montreal',
         'rosemont': 'Vieux-Rosemont'
     };
+
+    // Parse current res's date 
+    const oldResDate = dataRes && new Date(dataRes.date)
+    const weekDay = oldResDate ? oldResDate.toLocaleString('default', { weekday: 'long' }) : '';
+    const month = oldResDate ? oldResDate.toLocaleString('default', { month: 'long' }) : '';
+    const day = oldResDate ? oldResDate.getDate() : '';
+    const year = oldResDate ? oldResDate.getFullYear() : '';
 
     useEffect(() => {
         const fetchAvails = async () => {
@@ -38,55 +46,55 @@ const NewReservation = () => {
                 throw error;
             }
         };
-        if (!isLoading) {
-            fetchAvails(data); //._id?
+        if (!isLoadingLoc) {
+            fetchAvails(dataLoc);
         }
     }, [location]);
 
-    const availableDays = availabilities ? availabilities[0].days.map(day => (day.available)) : '';
-    const month = availabilities ? availabilities[0].month : '';
+    const availableDays = availabilities && availabilities[0].days.map(day => (day.available));
+    const currMonth = availabilities ? availabilities[0].month : null;
 
-    const handleNewReservation = async (e) => {
+    const handleModifyReservation = async (e) => {
         e.preventDefault();
         try {
-            const result = await handlePostSubmit(formData, '/reservations');
+            const result = await handlePatchSubmit(formData, `/reservations/${resId}`);
             if (result.status === 200) {
                 window.alert('Success!');
-                await navigate(`/reservations/user/${userId}`);
+                await navigate(`/reservations/user/${userId}`)
             } else {
                 window.alert(result.message);
-                //setFormData({ location: location, userId: userId }); // Reset state to current loc and always include userId
             }
         } catch (error) {
             throw error;
         }
     };
-
+    
     return (
         <>
-            <h1>Create a new reservation</h1>
+            <h1>Modify your upcoming reservation</h1>
             {
-                !isLoading ?
+                (!isLoadingLoc && !isLoadingRes) ? 
                 (
                     <>
+                        <div>Current reservation: {weekDay}, {month} {day}, {year} at CoSpaces {locations[dataRes.location]}</div>
                         <div>
                             <span>Please select a location: </span>
                             <LocationSelect
                                 handleDrop={handleDrop}
-                                data={data}
+                                data={dataLoc}
                                 locations={locations}
                             />
                         </div>
                         {isFetchDone && (
                             <div>
-                                <CalendarReservation
-                                    month={month}
+                                <CalendarReservation 
+                                    month={currMonth}
                                     availabilities={availableDays}
                                     changeDate={handleChangeDate}
                                     location={location}
                                     strLocation={locations[location]}
                                 />
-                                <button onClick={handleNewReservation}>Book!</button>
+                                <button onClick={handleModifyReservation}>Modify!</button>
                             </div>
                         )}
                     </>
@@ -94,19 +102,20 @@ const NewReservation = () => {
                 <Loading />
             }
         </>
-
     )
+
 };
 
-export default NewReservation;
 
-/*
+export default ModifyReservation;
 
-    // Changes date
+
+    /*
+    // Changes date for res
     const changeDate = (newDate) => {
         if (newDate) {
-            setFormData({ 
-                ...formData, 
+            setFormData({
+                ...formData,
                 year: String(newDate.getFullYear()),
                 month: String(newDate.getMonth()),
                 day: String(newDate.getDate())
@@ -121,5 +130,4 @@ export default NewReservation;
         setLocation(e.target.value);
         setFormData({ userId: userId, location: e.target.value });
         
-    };
-*/
+    };*/
