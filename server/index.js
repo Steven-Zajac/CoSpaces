@@ -33,31 +33,33 @@ app.use(express.urlencoded({ extended: false }))
 // ADD ENDPOINTS HERE //
 
 // User
-app.delete('/api/users/:userId', deleteUser) // Delete user data
-app.get('/api/users', getUsers) // retrieve all users
-app.get('/api/users/:userId', getUser) // retrieve single user
-app.patch('/api/users/:userId', patchUser) // Update user information (Eventually create a password only EP)
-app.post('/api/users', postUser) // Add a new user
+app.delete('/api/users/:userId', deleteUser); // Delete user data
+app.get('/api/users', getUsers); // retrieve all users
+app.get('/api/users/:userId', getUser); // retrieve single user
+app.patch('/api/users/:userId', patchUser); // Update user information (Eventually create a password only EP)
+app.post('/api/users', postUser); // Add a new user
 
 // Reservations
-app.delete('/api/reservations/:resId', deleteReservation)
-app.get('/api/reservations', getReservations) // Get all reservations
-app.get('/api/reservations/user/:userId', getUserReservations) // Get all res for a userId
-app.get('/api/reservations/res/:resId', getReservation) // Get res by resId
-app.patch('/api/reservations/:resId', patchReservation)
-app.post('/api/reservations', postReservation)
+app.delete('/api/reservations/:resId', deleteReservation);
+app.get('/api/reservations', getReservations); // Get all reservations
+app.get('/api/reservations/user/:userId', getUserReservations); // Get all res for a userId
+app.get('/api/reservations/res/:resId', getReservation); // Get res by resId
+app.patch('/api/reservations/:resId', patchReservation);
+app.post('/api/reservations', postReservation);
 
 // Availabilities & locations
-app.get('/api/availabilities/:location', getAvailabilities) // retrieve availabilities for specific location
-app.get('/api/locations', getLocations)
+app.get('/api/availabilities/:location', getAvailabilities); // retrieve availabilities for specific location
+app.get('/api/locations', getLocations);
 
 // Login 
-app.post('/api/login', postLogin)
+app.post('/api/login', postLogin);
 
 // CATCH ALL
-app.get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}))
+app.get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}));
 
 app.listen(PORT, () => console.info(`Listening on port ${PORT}`));
+
+module.exports = app;
 
     /*
     {
