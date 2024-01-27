@@ -20,7 +20,7 @@ const {
     getAvailabilities,
     getLocations,
     postLogin,
-} = require('./handlers');
+} = require('../../handlers');
 
 
 express()
