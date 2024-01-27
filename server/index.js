@@ -69,3 +69,16 @@ express()
     .get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}))
 
     .listen(PORT, () => console.info(`Listening on port ${PORT}`));
+
+    /*
+    {
+    "version": 2,
+    "builds": [
+        { "src": "server/package.json", "use": "@vercel/node" },
+        { "src": "client/package.json", "use": "@vercel/static-build", "config": { "distDir": "build" } }
+    ],
+    "routes": [
+        { "src": "/api/(.*)", "dest": "/api/$1" },
+        { "src": "/(.*)", "dest": "/client/build/$1" }
+    ]
+}*/
