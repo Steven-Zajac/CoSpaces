@@ -1,7 +1,6 @@
-'use-strict';
-
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors')
 
 const PORT = 4000;
 
@@ -22,53 +21,43 @@ const {
     postLogin,
 } = require('./handlers');
 
+const app = express();
 
-express()
-    .use(function(req, res, next) {
-        res.header(
-            'Access-Control-Allow-Methods',
-            'OPTIONS, HEAD, GET, PUT POST, DELETE'
-        );
-        res.header(
-            'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept'
-        );
-        next();
-    })
-    .use(morgan('tiny'))
-    .use(express.static('./server/assets'))
-    .use(express.json())
-    .use(express.urlencoded({ extended: false }))
-    .use('/', express.static(__dirname + '/'))
+app.use(cors());
+app.use(morgan('tiny'));
+app.use(express.static('public')); //'./server/assets'
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+//app.use('/', express.static(__dirname + '/'))
 
 // ADD ENDPOINTS HERE //
 
-    // User
-    .delete('/api/users/:userId', deleteUser) // Delete user data
-    .get('/api/users', getUsers) // retrieve all users
-    .get('/api/users/:userId', getUser) // retrieve single user
-    .patch('/api/users/:userId', patchUser) // Update user information (Eventually create a password only EP)
-    .post('/api/users', postUser) // Add a new user
+// User
+app.delete('/api/users/:userId', deleteUser) // Delete user data
+app.get('/api/users', getUsers) // retrieve all users
+app.get('/api/users/:userId', getUser) // retrieve single user
+app.patch('/api/users/:userId', patchUser) // Update user information (Eventually create a password only EP)
+app.post('/api/users', postUser) // Add a new user
 
-    // Reservations
-    .delete('/api/reservations/:resId', deleteReservation)
-    .get('/api/reservations', getReservations) // Get all reservations
-    .get('/api/reservations/user/:userId', getUserReservations) // Get all res for a userId
-    .get('/api/reservations/res/:resId', getReservation) // Get res by resId
-    .patch('/api/reservations/:resId', patchReservation)
-    .post('/api/reservations', postReservation)
+// Reservations
+app.delete('/api/reservations/:resId', deleteReservation)
+app.get('/api/reservations', getReservations) // Get all reservations
+app.get('/api/reservations/user/:userId', getUserReservations) // Get all res for a userId
+app.get('/api/reservations/res/:resId', getReservation) // Get res by resId
+app.patch('/api/reservations/:resId', patchReservation)
+app.post('/api/reservations', postReservation)
 
-    // Availabilities & locations
-    .get('/api/availabilities/:location', getAvailabilities) // retrieve availabilities for specific location
-    .get('/api/locations', getLocations)
+// Availabilities & locations
+app.get('/api/availabilities/:location', getAvailabilities) // retrieve availabilities for specific location
+app.get('/api/locations', getLocations)
 
-    // Login 
-    .post('/api/login', postLogin)
+// Login 
+app.post('/api/login', postLogin)
 
-    // CATCH ALL
-    .get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}))
+// CATCH ALL
+app.get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}))
 
-    .listen(PORT, () => console.info(`Listening on port ${PORT}`));
+app.listen(PORT, () => console.info(`Listening on port ${PORT}`));
 
     /*
     {
