@@ -12,7 +12,7 @@ const handleUserLoggedIn = () => {
         if (userId && !alertShown.current) {
             window.alert('User already logged in');
             alertShown.current = true;
-            navigate(`/home/${userId}`);
+            navigate(`/user/${userId}/home`);
         }
     }, [navigate]);
 

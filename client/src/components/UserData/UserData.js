@@ -5,6 +5,7 @@ import handlePatchSubmit from "../handlers/handlePatchSubmit";
 
 import useFetch from "../hooks/useFetch";
 import useFormData from "../hooks/useFormData";
+import useLogout from "../hooks/useLogout";
 import useUserDeletionHandler from "../hooks/useUserDeletionHandler";
 
 import Loading from "../Global/Loading";
@@ -17,7 +18,9 @@ const UserData = () => {
     const [ formData, handleChange ] = useFormData({})
     const [isEditMode, setIsEditMode] = useState(false);
     const profileDelete = useUserDeletionHandler();
+    const logout = useLogout();
 
+    console.log(formData)
     // Toggles whether we are in edit more or not. 
     const toggleEditMode = () => {
         setIsEditMode(!isEditMode); 
@@ -32,7 +35,8 @@ const UserData = () => {
                 location.reload();
             } else {
                 window.alert(result.message);
-                location.reload();
+                //location.reload();
+                setIsEditMode(true);
             }
         } catch (error) {
             throw error;
@@ -96,7 +100,7 @@ const UserData = () => {
                     </div>
                 </div> : 
                 !isLoading && !data ? 
-                <h1>User not found</h1> :
+                (<h1>User not found</h1> && logout()) :
                 <Loading />
             }
         </>

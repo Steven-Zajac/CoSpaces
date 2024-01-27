@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
 
-
-const handleUserDelete = async (userId) => {
-    
+// Deletes user profile and reservations
+const handleDeleteUser = async (userId) => {
     const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
     
     if (isConfirmed) {
@@ -27,4 +25,4 @@ const handleUserDelete = async (userId) => {
     }
 };
 
-export default handleUserDelete;
+export default handleDeleteUser;

@@ -10,6 +10,7 @@ const postReservation = async (req, res) => {
 
     // Verify if fields are missing or empty
     const resValues = Object.values(req.body);
+
     const missingData = (resValues.some(item => item.trim() === '') || resValues.length !== 5);
     if (missingData) {
         res.status(404).json({
@@ -44,7 +45,6 @@ const postReservation = async (req, res) => {
         ];
 
         const isAvailable = await db.collection('availabilities').aggregate(pipeline).toArray();
-
         // Case: If no match found with pipeline
         if (!isAvailable.length) {
             res.status(409).json({

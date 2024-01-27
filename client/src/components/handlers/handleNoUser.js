@@ -8,7 +8,7 @@ const handleNoUser = () => {
 
     useEffect(() => {
         const userId = localStorage.getItem('userId');
-        !userId && navigate('/login');
+        !userId && navigate('/');
     }, [navigate]);
     
 }

@@ -1,7 +1,7 @@
 
 // Handles the deletion of a specific reservation 
 const handleDeleteReservation = async (resId) => {
-    const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+    const isConfirmed = window.confirm("Are you sure you want to delete your reservation? This action cannot be undone.");
 
     if (isConfirmed) {
         try {

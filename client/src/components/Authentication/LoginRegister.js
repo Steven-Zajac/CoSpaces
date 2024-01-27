@@ -14,17 +14,19 @@ const LoginRegister = () => {
     console.log(isRegister)
 
     // Want to toggle between registration and logging in
+    // Also bolden the text depending on toggle register
 
     return (
 
         <> 
             <div>
                 <div>
+                    <span>Login</span>
                     <SwitchBox>
                         <SLiderInputChecked type="checkbox" checked={isRegister} onChange={toggleRegister} />
                         <Slider />
                     </SwitchBox>
-                    <h3>{isRegister ? 'Register' : 'Login'}</h3>
+                    <span>Register</span>
                 </div>
                 <div>
                     {!isRegister ? (

@@ -18,6 +18,7 @@ const {
     postReservation,
     patchReservation,
     getAvailabilities,
+    getLocations,
     postLogin,
 } = require('./handlers');
 
@@ -57,8 +58,9 @@ express()
     .patch('/reservations/:resId', patchReservation)
     .post('/reservations', postReservation)
 
-    // Availabilities
+    // Availabilities & locations
     .get('/availabilities/:location', getAvailabilities) // retrieve availabilities for specific location
+    .get('/locations', getLocations)
 
     // Login 
     .post('/login', postLogin)
