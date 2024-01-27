@@ -68,8 +68,6 @@ express()
     // CATCH ALL
     .get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}))
 
-
-    /*
     .listen(PORT, () => console.info(`Listening on port ${PORT}`));
 
     /*
