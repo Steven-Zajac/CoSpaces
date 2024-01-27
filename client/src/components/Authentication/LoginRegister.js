@@ -37,11 +37,6 @@ const LoginRegister = () => {
             </div>
         </>
     )
-//<button onClick={toggleRegister}>{ isRegister ? 'Sign up' : 'Sign in'}</button>
-
-
-
-
 };
 
 export default LoginRegister;

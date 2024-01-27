@@ -19,8 +19,10 @@ const ModifyReservation = () => {
     const [ formData, location, handleDrop, handleChangeDate ] = useCalendarData(false)
     const { isLoading: isLoadingRes, data: dataRes } = useFetch(`/reservations/res/${resId}`);
     const { isLoading: isLoadingLoc, data: dataLoc } = useFetch('/locations');
-    const [availabilities, setAvailabilities] = useState(null);
-    const [isFetchDone, setIsFetchDone] = useState(false);
+    const { isLoading, data} = useFetch(`/availabilities/${location}`);
+   // const [availabilities, setAvailabilities] = useState(null);
+    //const [isFetchDone, setIsFetchDone] = useState(false);
+
 
     const locations = {
         'downtown': 'Downtown Montreal',
@@ -34,25 +36,8 @@ const ModifyReservation = () => {
     const day = oldResDate ? oldResDate.getDate() : '';
     const year = oldResDate ? oldResDate.getFullYear() : '';
 
-    useEffect(() => {
-        const fetchAvails = async () => {
-            setIsFetchDone(false)
-            try {
-                const response = await fetch(`/availabilities/${location}`);
-                const result = await response.json();
-                setAvailabilities(result.data);
-                setIsFetchDone(true);
-            } catch (error) {
-                throw error;
-            }
-        };
-        if (!isLoadingLoc) {
-            fetchAvails(dataLoc);
-        }
-    }, [location]);
-
-    const availableDays = availabilities && availabilities[0].days.map(day => (day.available));
-    const currMonth = availabilities ? availabilities[0].month : null;
+    const availableDays = data && data[0].days.map(day => (day.available));
+    const currMonth = data ? data[0].month : null;
 
     const handleModifyReservation = async (e) => {
         e.preventDefault();
@@ -85,7 +70,7 @@ const ModifyReservation = () => {
                                 locations={locations}
                             />
                         </div>
-                        {isFetchDone && (
+                        {!isLoading && (
                             <div>
                                 <CalendarReservation 
                                     month={currMonth}
@@ -109,25 +94,3 @@ const ModifyReservation = () => {
 
 export default ModifyReservation;
 
-
-    /*
-    // Changes date for res
-    const changeDate = (newDate) => {
-        if (newDate) {
-            setFormData({
-                ...formData,
-                year: String(newDate.getFullYear()),
-                month: String(newDate.getMonth()),
-                day: String(newDate.getDate())
-            })
-        }
-    };
-
-    const handleDropDown = (e) => {
-        if (e.target.value === 'selectOne') {
-            return;
-        }
-        setLocation(e.target.value);
-        setFormData({ userId: userId, location: e.target.value });
-        
-    };*/

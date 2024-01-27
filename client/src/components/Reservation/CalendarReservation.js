@@ -11,7 +11,6 @@ const CalendarReservation = (props) => {
     const { 
         availabilities, 
         changeDate,
-        location,
         month, 
         strLocation,
     } = props;
