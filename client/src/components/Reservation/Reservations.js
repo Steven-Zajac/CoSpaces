@@ -8,7 +8,7 @@ const Reservations = () => {
 
     handleNoUser(); // If no logged in user, cannot access this page
     const userId = localStorage.getItem('userId');
-    const { isLoading, data } = useFetch(`/reservations/user/${userId}`)
+    const { isLoading, data } = useFetch(`/api/reservations/user/${userId}`)
     const sortedData = !isLoading && [...data].sort((a,b) => new Date(a.date) - new Date(b.date)); // Want to sort res by date
 
     // Create new reservation component/form

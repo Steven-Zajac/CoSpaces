@@ -44,26 +44,26 @@ express()
 // ADD ENDPOINTS HERE //
 
     // User
-    .delete('/users/:userId', deleteUser) // Delete user data
-    .get('/users', getUsers) // retrieve all users
-    .get('/users/:userId', getUser) // retrieve single user
-    .patch('/users/:userId', patchUser) // Update user information (Eventually create a password only EP)
-    .post('/users', postUser) // Add a new user
+    .delete('/api/users/:userId', deleteUser) // Delete user data
+    .get('/api/users', getUsers) // retrieve all users
+    .get('/api/users/:userId', getUser) // retrieve single user
+    .patch('/api/users/:userId', patchUser) // Update user information (Eventually create a password only EP)
+    .post('/api/users', postUser) // Add a new user
 
     // Reservations
-    .delete('/reservations/:resId', deleteReservation)
-    .get('/reservations', getReservations) // Get all reservations
-    .get('/reservations/user/:userId', getUserReservations) // Get all res for a userId
-    .get('/reservations/res/:resId', getReservation) // Get res by resId
-    .patch('/reservations/:resId', patchReservation)
-    .post('/reservations', postReservation)
+    .delete('/api/reservations/:resId', deleteReservation)
+    .get('/api/reservations', getReservations) // Get all reservations
+    .get('/api/reservations/user/:userId', getUserReservations) // Get all res for a userId
+    .get('/api/reservations/res/:resId', getReservation) // Get res by resId
+    .patch('/api/reservations/:resId', patchReservation)
+    .post('/api/reservations', postReservation)
 
     // Availabilities & locations
-    .get('/availabilities/:location', getAvailabilities) // retrieve availabilities for specific location
-    .get('/locations', getLocations)
+    .get('/api/availabilities/:location', getAvailabilities) // retrieve availabilities for specific location
+    .get('/api/locations', getLocations)
 
     // Login 
-    .post('/login', postLogin)
+    .post('/api/login', postLogin)
 
     // CATCH ALL
     .get('*', (req, res) => res.status(404).json({status: 404, message: "PAGE NOT FOUND"}))

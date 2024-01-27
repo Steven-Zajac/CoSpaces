@@ -5,7 +5,7 @@ const handleDeleteReservation = async (resId) => {
 
     if (isConfirmed) {
         try {
-            const deletion = await fetch(`/reservations/${resId}`, {
+            const deletion = await fetch(`/api/reservations/${resId}`, {
                 method: "DELETE",
                 headers: {
                     Accept: "application/json",

@@ -14,7 +14,7 @@ const UserData = () => {
 
     handleNoUser();
     const userId = localStorage.getItem('userId');
-    const { isLoading, data } = useFetch(`/users/${userId}`);
+    const { isLoading, data } = useFetch(`/api/users/${userId}`);
     const [ formData, handleChange ] = useFormData({})
     const [isEditMode, setIsEditMode] = useState(false);
     const profileDelete = useUserDeletionHandler();
@@ -28,7 +28,7 @@ const UserData = () => {
     const handleSave = async (e) => {
         e.preventDefault();
         try {
-            const result = await handlePatchSubmit(formData, `/users/${userId}`);
+            const result = await handlePatchSubmit(formData, `/api/users/${userId}`);
             if (result.status === 200) {
                 window.alert('Success!');
                 location.reload();

@@ -17,9 +17,9 @@ const ModifyReservation = () => {
     const { resId } = useParams();
     const navigate = useNavigate();
     const [ formData, location, handleDrop, handleChangeDate ] = useCalendarData(false)
-    const { isLoading: isLoadingRes, data: dataRes } = useFetch(`/reservations/res/${resId}`);
-    const { isLoading: isLoadingLoc, data: dataLoc } = useFetch('/locations');
-    const { isLoading, data} = useFetch(`/availabilities/${location}`);
+    const { isLoading: isLoadingRes, data: dataRes } = useFetch(`/api/reservations/res/${resId}`);
+    const { isLoading: isLoadingLoc, data: dataLoc } = useFetch('/api/locations');
+    const { isLoading, data} = useFetch(`/api/availabilities/${location}`);
    // const [availabilities, setAvailabilities] = useState(null);
     //const [isFetchDone, setIsFetchDone] = useState(false);
 
@@ -42,7 +42,7 @@ const ModifyReservation = () => {
     const handleModifyReservation = async (e) => {
         e.preventDefault();
         try {
-            const result = await handlePatchSubmit(formData, `/reservations/${resId}`);
+            const result = await handlePatchSubmit(formData, `/api/reservations/${resId}`);
             if (result.status === 200) {
                 window.alert('Success!');
                 await navigate(`/reservations/user/${userId}`)

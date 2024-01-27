@@ -16,7 +16,7 @@ const RegistrationForm = () => {
         } else {
             delete formData['passwordCheck']; // Don't need to keep doubles of the password
             try {
-                const result = await handlePostSubmit(formData, '/users');
+                const result = await handlePostSubmit(formData, '/api/users');
                 if (result.status === 200) {
                     await navigate(`/register/${result.data}`);
                 } else {

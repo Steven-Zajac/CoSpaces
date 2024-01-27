@@ -14,14 +14,14 @@ const UserHome = () => {
 
     handleNoUser(); // If no user, redirect to login
     const userId = localStorage.getItem('userId');
-    const { isLoading, data } = useFetch(`/users/${userId}`);
+    const { isLoading, data } = useFetch(`/api/users/${userId}`);
     const [reservations, setReservations] = useState(null);
     const [isFetchDone, setIsFetchDone] = useState(false);
 
     useEffect(() => {
         const fetchRes = async () => {
             try {
-                const response = await fetch(`/reservations/user/${userId}`);
+                const response = await fetch(`/api/reservations/user/${userId}`);
                 const result = await response.json();
                 setReservations(result.data);
                 setIsFetchDone(true);

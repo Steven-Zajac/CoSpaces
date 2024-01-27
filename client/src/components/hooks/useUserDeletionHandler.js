@@ -8,7 +8,7 @@ const useUserDeletionHandler = (userId) => {
         
         if (isConfirmed) {
             try {
-                const deletion = await fetch(`/users/${userId}`, {
+                const deletion = await fetch(`/api/users/${userId}`, {
                     method: "DELETE",
                     headers: {
                         Accept: "application/json",

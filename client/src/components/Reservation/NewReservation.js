@@ -17,7 +17,7 @@ const NewReservation = () => {
     const userId = localStorage.getItem('userId');
     const navigate = useNavigate();
     const [ formData, location, handleDrop, handleChangeDate ] = useCalendarData(true, userId)
-    const { isLoading, data } = useFetch('/locations');
+    const { isLoading, data } = useFetch('/api/locations');
     const [availabilities, setAvailabilities] = useState(null);
     const [isFetchDone, setIsFetchDone] = useState(false);
 
@@ -30,7 +30,7 @@ const NewReservation = () => {
         const fetchAvails = async () => {
             setIsFetchDone(false)
             try {
-                const response = await fetch(`/availabilities/${location}`);
+                const response = await fetch(`/api/availabilities/${location}`);
                 const result = await response.json();
                 setAvailabilities(result.data);
                 setIsFetchDone(true);
@@ -49,7 +49,7 @@ const NewReservation = () => {
     const handleNewReservation = async (e) => {
         e.preventDefault();
         try {
-            const result = await handlePostSubmit(formData, '/reservations');
+            const result = await handlePostSubmit(formData, '/api/reservations');
             if (result.status === 200) {
                 window.alert('Success!');
                 await navigate(`/reservations/user/${userId}`);

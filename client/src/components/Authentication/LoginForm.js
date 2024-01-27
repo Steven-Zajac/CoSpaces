@@ -14,7 +14,7 @@ const LoginForm = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await handlePostSubmit(formData, '/login');
+            const result = await handlePostSubmit(formData, '/api/login');
             if (result.status === 200) {
                 // Stores userId in local storage. Will use token for better security
                 localStorage.setItem('userId', result.data[1]); 
