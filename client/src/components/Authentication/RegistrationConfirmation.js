@@ -1,4 +1,6 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
+
+import styled from "styled-components";
 
 import useFetch from "../hooks/useFetch";
 import Loading from "../Global/Loading";
@@ -16,14 +18,37 @@ const RegistrationConfirmation = () => {
             <Loading /> :
             error ? 
             <RaiseError /> :
-            <>
-            <h1>Registration Confirmation</h1>
-            <p>Thanks {fname}! Your registration was successful. <br/> We have sent a confirmation to {email}</p>
-            <p>Please <Link to='/'>login</Link> to reserve your workspace</p>
-            </>
+            <Container>
+                <Title>Registration Confirmation</Title>
+                <Text>Thanks {fname}! Your registration was successful.</Text>
+                <Text>We have sent a confirmation to {email}</Text>
+                <Text>Please <StyledLink to='/'>login</StyledLink> to reserve your workspace</Text>
+            </Container>
         }
         </>
     )
 };
 
 export default RegistrationConfirmation;
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 20vh;
+    margin: 0 auto;
+`;
+
+const Title = styled.h1`
+
+`;
+
+const Text = styled.span`
+    font-size: 20px;
+`;
+
+const StyledLink = styled(NavLink)`
+    color: #9092fc;
+`;

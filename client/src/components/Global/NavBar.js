@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 import useLogout from '../hooks/useLogout';
 
 const NavBar = () => {
@@ -6,27 +7,57 @@ const NavBar = () => {
     const logout = useLogout();
 
     // Will switch depending on which pathname is returned
-    const renderedLinks = () => {
-
-        return (
-            userId && 
-            (
-                <>
-                    <NavLink to={`/user/${userId}/home`}>Home</NavLink>
-                    <NavLink to={`/reservations/user/${userId}`}>Reservations</NavLink>
-                    <NavLink to={`/user/${userId}/details`}>My Info</NavLink>
-                    <button onClick={logout}>Logout</button>
-                </>
-            )
-        );
-    };
 
     return (
-        <nav>
-            {renderedLinks()}
-        </nav>
-    )
-
+        userId && 
+        (
+            <NavContainer>
+                <StyledNav to={`/user/${userId}/home`}>Home</StyledNav>
+                <StyledNav to={`/reservations/user/${userId}`}>Reservations</StyledNav>
+                <StyledNav to={`/user/${userId}/details`}>My Info</StyledNav>
+                <StyledNav onClick={logout}>Logout</StyledNav>
+            </NavContainer>
+        )
+    );
 };
 
 export default NavBar;
+
+
+const NavContainer = styled.nav`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    font-size: 20px;
+    background-color: #caf2bf;
+    text-decoration: none;
+
+    a:hover {
+        transform: scale(1.3);
+        color: white;
+    }
+
+`;
+
+const StyledNav = styled(NavLink)`
+    margin-right: 20px;
+    text-decoration: none;
+    color: #865fb3;
+
+
+    &.active {
+        color: #ed3434;
+        border-bottom: solid black;
+    }
+    
+    &:nth-child(4) {
+        color: #ab0c03;
+        font-size: 19px;
+        border: solid black 1px;
+        padding: 8px;
+        background-color: #e2e3d5;
+        border-radius: 10px;
+    }
+`;

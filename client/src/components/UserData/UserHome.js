@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+
 import handleNoUser from '../handlers/handleNoUser';
 import useFetch from '../hooks/useFetch';
 import Loading from '../Global/Loading';
@@ -43,16 +45,16 @@ const UserHome = () => {
         <>
             {
                 isFetchDone ?
-                <>
-                    <h1>Welcome, {data.fname}!</h1> 
+                <Container>
+                    <Title>Welcome, {data.fname}!</Title> 
                     {
                         date ?
-                        <div>
-                            Your next reservation is for {days[date.getDay()]}, {months[date.getMonth()]} {date.getDate()}, {date.getFullYear()} at {locations[sortedReservations[0].location]}
-                        </div> : 
-                        <div>You have no upcoming reservations</div>
+                        <Text>
+                            Your next reservation is for <ResInfo>{days[date.getDay()]}, {months[date.getMonth()]} {date.getDate()}, {date.getFullYear()}</ResInfo> at {locations[sortedReservations[0].location]}
+                        </Text> : 
+                        <Text>You have no upcoming reservations</Text>
                     }
-                </> : 
+                </Container> : 
                 <Loading />
 
             }
@@ -61,6 +63,26 @@ const UserHome = () => {
 
 };
 
-/*!isLoading && date ?*/
-
 export default UserHome;
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 75%;
+    padding: 2rem;
+    padding-left: 7rem;
+
+`;
+
+const Title = styled.h1`
+
+`;
+
+const Text = styled.div`
+
+`;
+
+const ResInfo = styled.span`
+    border-bottom: solid black;
+`;
