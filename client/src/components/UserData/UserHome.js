@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import handleNoUser from '../handlers/handleNoUser';
@@ -31,10 +32,10 @@ const UserHome = () => {
                 throw error;
             }
         };
-        if (!isLoading) {
+        if (!isLoading && data) {
             fetchRes(data._id);
-        }
-    }, [isLoading]);
+        } 
+    }, [data]);
     
     // Sorts reservations is fetch is done and reservations are present
     const sortedReservations = (isFetchDone && reservations) && reservations.sort((a,b) => new Date(a.date) - new Date(b.date));
@@ -44,7 +45,7 @@ const UserHome = () => {
     return (
         <>
             {
-                isFetchDone ?
+                (isFetchDone && data) ?
                 <Container>
                     <Title>Welcome, {data.fname}!</Title> 
                     {

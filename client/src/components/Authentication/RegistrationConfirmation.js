@@ -11,6 +11,7 @@ const RegistrationConfirmation = () => {
     const { userId } = useParams();
     const { isLoading, data, error } = useFetch(`/api/users/${userId}`); // Fetch to retrieve registered user's data
     const { fname, email } = !isLoading && data;
+    
     return (
         <>
         {

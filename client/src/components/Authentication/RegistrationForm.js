@@ -9,7 +9,7 @@ const RegistrationForm = () => {
     const [ formData, handleChange ] = useFormData({})
     const navigate = useNavigate(); // Want to use this to redirect user to registration confirmation page 
 
-    handleUserLoggedIn();
+    //handleUserLoggedIn();
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();

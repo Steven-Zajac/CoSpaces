@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const LoginForm = () => {
     
-    handleUserLoggedIn();
+    //handleUserLoggedIn();
 
     const [ formData, handleChange ] = useFormData({})
     const navigate = useNavigate();

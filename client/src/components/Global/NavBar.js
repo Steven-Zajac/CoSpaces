@@ -1,13 +1,11 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import useLogout from '../hooks/useLogout';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
     const userId = localStorage.getItem('userId'); // Checks if logged in 
     const logout = useLogout();
-
-    // Will switch depending on which pathname is returned
-
     return (
         userId && 
         (
@@ -31,8 +29,9 @@ const NavContainer = styled.nav`
     padding-top: 1vh;
     padding-bottom: 1vh;
     font-size: 20px;
-    background-color: #caf2bf;
+    background: linear-gradient(to bottom, #ff9999 0%, #ffcc99 100%);
     text-decoration: none;
+    //border: solid black 2px;
 
     a:hover {
         transform: scale(1.3);
