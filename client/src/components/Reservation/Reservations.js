@@ -18,31 +18,35 @@ const Reservations = () => {
 
     return (
         <Container>
-            <Title>Upcoming reservations</Title>
-            <ResContainer>
             {
                 !isLoading && data.length ?
-                (
-                    <ResList>
-                        <ul>
-                            {sortedData.map(res => (
-                                <SingleReservation resData={res} key={res._id} />
-                            ))}
-                        </ul>
-                    </ResList>
+                (   <ResContainer>
+                        <Title>Upcoming reservations</Title>
+                        <ResList>
+                            <ul>
+                                {sortedData.map(res => (
+                                    <SingleReservation resData={res} key={res._id} />
+                                ))}
+                            </ul>
+                        </ResList>
+                        <ButtonLink href="/reservations/new" rel="noopener noreferrer">
+                            <Button>New Reservation</Button>
+                        </ButtonLink>
+                    </ResContainer>
                 ) :
                 !isLoading && !data.length ?
                 (
-                    <div>
-                        <h1>No reservations</h1> 
-                    </div>
+                    <NoResContainer>
+                        <div>
+                            <h1>No reservations</h1> 
+                        </div>
+                        <NoResButtonLink href="/reservations/new" rel="noopener noreferrer">
+                            <NoResButton>New Reservation</NoResButton>
+                        </NoResButtonLink>
+                    </NoResContainer>
                 ) :
                 <Loading />
             }
-            <ButtonLink href="/reservations/new" rel="noopener noreferrer">
-                <Button>New Reservation</Button>
-            </ButtonLink>
-            </ResContainer>
         </Container>
     );
 };
@@ -53,26 +57,59 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3rem;
 `;
 
 const Title = styled.h1`
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const ResContainer = styled.div`
     display: flexbox;
     align-content: end;
+    margin-top: 3rem;
+
 `;
 
 const ResList = styled.div`
-    background-color: rgba(216, 233, 242, .3);
+    background-color: rgba(247,178,166, .3);;
     min-width: 25vw;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+    border-radius: 25px 25px;
+    border: solid black 1px;
 
 `;
 
+const NoResContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-top: 3rem;
+`;
+
+const NoResButtonLink = styled.a`
+    display: flex;
+    padding-top: 2rem;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+`;
+
+const NoResButton = styled.button`
+    background-color: #ed952f;
+    color: white;
+    border-radius: 10px 10px;
+    padding: 8px;
+    font-size: 1rem;
+
+    &:hover {
+        background-color: #cbddf5;
+    }
+
+`;
 
 const ButtonLink = styled.a`
     display: flex;

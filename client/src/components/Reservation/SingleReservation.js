@@ -58,7 +58,6 @@ const ButtonContainer = styled.div`
 
 const Button = styled.button`
     background-color: #f2d2aa;
-    color: black;
     border-radius: 5px 5px;
     padding: 5px;
     font-size: .75rem;

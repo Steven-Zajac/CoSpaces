@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
 
 import Loading from "../Global/Loading";
 import CalendarReservation from "./CalendarReservation";
@@ -56,22 +57,24 @@ const ModifyReservation = () => {
     
     return (
         <>
-            <h1>Modify your upcoming reservation</h1>
             {
                 (!isLoadingLoc && !isLoadingRes) ? 
                 (
-                    <>
-                        <div>Current reservation: {weekDay}, {month} {day}, {year} at CoSpaces {locations[dataRes.location]}</div>
-                        <div>
+                    <Container>
+                        <Text>
+                            <h1>Modify your upcoming reservation</h1>
+                            <div>Current reservation: {weekDay}, {month} {day}, {year} at CoSpaces {locations[dataRes.location]}</div>
+                        </Text>
+                        <DropDown>
                             <span>Please select a location: </span>
                             <LocationSelect
                                 handleDrop={handleDrop}
                                 data={dataLoc}
                                 locations={locations}
                             />
-                        </div>
-                        {!isLoading && (
-                            <div>
+                        </DropDown>
+                        {(!isLoading && data) && (
+                            <CalendarContainer>
                                 <CalendarReservation 
                                     month={currMonth}
                                     availabilities={availableDays}
@@ -79,10 +82,10 @@ const ModifyReservation = () => {
                                     location={location}
                                     strLocation={locations[location]}
                                 />
-                                <button onClick={handleModifyReservation}>Modify!</button>
-                            </div>
+                                <BookButton onClick={handleModifyReservation}>Modify!</BookButton>
+                            </CalendarContainer>
                         )}
-                    </>
+                    </Container>
                 ) :
                 <Loading />
             }
@@ -94,3 +97,43 @@ const ModifyReservation = () => {
 
 export default ModifyReservation;
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
+    align-items: center;
+`;
+
+const Text = styled.div`
+
+
+`;
+
+const DropDown = styled.div`
+    span {
+        font-size: 18px;
+    }
+
+`;
+
+const CalendarContainer = styled.div`
+    display: inline-block;
+    width: 55%;
+
+
+`;
+
+const BookButton = styled.button`
+    background-color: #ed952f;
+    color: white;
+    border-radius: 10px 10px;
+    padding: 8px;
+    margin-top: .75rem;
+    font-size: 1rem;
+
+    &:hover {
+        background-color: #cbddf5;
+    }
+
+
+`;

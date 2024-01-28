@@ -65,7 +65,7 @@ const CalendarReservation = (props) => {
         <>
             {
                 (props.month !== null) &&
-                <div>
+                <CalendarContainer>
                     <h1>Availabilities for {strLocation}</h1>
                     <StyledCalendar
                     onChange={changeDate}
@@ -77,7 +77,7 @@ const CalendarReservation = (props) => {
                     onClickDay={daySelector}
                     tileClassName={tileClassName}
                     />
-                </div>
+                </CalendarContainer>
             }
         </>
     )
@@ -90,4 +90,8 @@ const StyledCalendar = styled(Calendar)`
         background-color: #4caf50;
         color: white;
     }
+`;
+
+const CalendarContainer = styled.div`
+    font-size: 18px;
 `;

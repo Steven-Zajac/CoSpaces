@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 import Loading from "../Global/Loading";
 import CalendarReservation from "./CalendarReservation";
@@ -63,22 +64,22 @@ const NewReservation = () => {
     };
 
     return (
-        <>
-            <h1>Create a new reservation</h1>
+        <Container>
             {
                 !isLoading ?
                 (
                     <>
-                        <div>
+                    <Title>Create a new reservation</Title>
+                        <DropDown>
                             <span>Please select a location: </span>
                             <LocationSelect
                                 handleDrop={handleDrop}
                                 data={data}
                                 locations={locations}
                             />
-                        </div>
+                        </DropDown>
                         {isFetchDone && (
-                            <div>
+                            <CalendarContainer>
                                 <CalendarReservation
                                     month={month}
                                     availabilities={availableDays}
@@ -86,40 +87,58 @@ const NewReservation = () => {
                                     location={location}
                                     strLocation={locations[location]}
                                 />
-                                <button onClick={handleNewReservation}>Book!</button>
-                            </div>
+                                <BookButton onClick={handleNewReservation}>Book!</BookButton>
+                            </CalendarContainer>
                         )}
                     </>
                 ) :
                 <Loading />
             }
-        </>
+        </Container>
 
     )
 };
 
 export default NewReservation;
 
-/*
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    // Changes date
-    const changeDate = (newDate) => {
-        if (newDate) {
-            setFormData({ 
-                ...formData, 
-                year: String(newDate.getFullYear()),
-                month: String(newDate.getMonth()),
-                day: String(newDate.getDate())
-            })
-        }
-    };
+`;
 
-    const handleDropDown = (e) => {
-        if (e.target.value === 'selectOne') {
-            return;
-        }
-        setLocation(e.target.value);
-        setFormData({ userId: userId, location: e.target.value });
-        
-    };
-*/
+const Title = styled.h1`
+
+
+`;
+
+const DropDown = styled.div`
+    span {
+        font-size: 18px;
+    }
+
+`;
+
+const CalendarContainer = styled.div`
+    display: inline-block;
+    width: 55%;
+
+
+`;
+
+const BookButton = styled.button`
+    background-color: #ed952f;
+    color: white;
+    border-radius: 10px 10px;
+    padding: 8px;
+    margin-top: .75rem;
+    font-size: 1rem;
+
+    &:hover {
+        background-color: #cbddf5;
+    }
+
+
+`;

@@ -34,7 +34,7 @@ const UserData = () => {
                 window.alert('Success!');
                 location.reload();
             } else {
-                window.alert(result.message);
+                //window.alert(result.message);
                 //location.reload();
                 setIsEditMode(true);
             }

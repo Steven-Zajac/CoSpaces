@@ -20,7 +20,7 @@ const useUserDeletionHandler = (userId) => {
                 } else {
                     window.alert('Success!');
                     navigate('/');
-                    localStorage.clear();
+                    setTimeout(localStorage.clear(), 5000);
                 }
             } catch (error) {
                 throw error;
