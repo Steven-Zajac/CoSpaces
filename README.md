@@ -26,7 +26,7 @@ Secure(ish) Data Management: Ensures the privacy and security of user data throu
    </br>_git clone https://github.com/Steven-Zajac/FinalProject.git_
 
 2. Navigate to the Project Directory:
-   </br>cd reservation-management-system
+   </br>(cd eg _reservation-management-system_)
 
 3. Install Dependencies:
    </br>npm install
