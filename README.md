@@ -27,35 +27,34 @@ Secure(ish) Data Management: Ensures the privacy and security of user data throu
 
 2. Navigate to the Project Directory:
    </br>cd reservation-management-system
-   Install Dependencies:
-   bash
-   Copy code
-   npm install
-   Start the Application:
-   bash
-   Copy code
-   npm start
-   The application will now be running at http://localhost:3000.
-   Usage
-   Describe how users can operate or interact with your system. Include any key functionalities and how to access them.
 
-Contributing
-We welcome contributions from the community. If you wish to contribute:
+3. Install Dependencies:
+   </br>npm install
 
-Fork the repository.
-Create a new branch (git checkout -b feature-branch).
-Make your changes and commit (git commit -am 'Add some feature').
-Push to the branch (git push origin feature-branch).
-Create a new Pull Request.
-Support
-For support, email support@rms.com or join our Slack channel.
+4. Start the Application:
+   </br>npm start
+   </br>_The application will now be running at http://localhost:3000._
 
-Authors
-Your Name - Initial work - YourUsername
-See also the list of contributors who participated in this project.
+5. Go crazy!
+   </br> Feel free to use the platform as you wish. The platform will have some limitations due to it being updated and tested.
 
-License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+## Contributing
+
+Contributions are welcome!
+
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature-branch).
+3. Make your changes and commit (git commit -am 'Add some feature').
+4. Push to the branch (git push origin feature-branch).
+5. Create a new Pull Request.
+
+## Support or comments
+
+For support, email me at: zajac.steve.26@gmail.com
+
+## License
+
+This project is licensed under the MIT License.
 
 Acknowledgments
 Hat tip to anyone whose code was used

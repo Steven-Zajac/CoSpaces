@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import backgroundImage from '../../assets/loginpic.avif';
 
 import { useState } from "react";
 import RegistrationForm from "./RegistrationForm";
@@ -18,28 +19,90 @@ const LoginRegister = () => {
     return (
 
         <> 
-            <div>
-                <div>
-                    <span>Login</span>
-                    <SwitchBox>
-                        <SLiderInputChecked type="checkbox" checked={isRegister} onChange={toggleRegister} />
-                        <Slider />
-                    </SwitchBox>
-                    <span>Register</span>
-                </div>
-                <div>
-                    {!isRegister ? (
-                        <LoginForm />
-                    ) : (
-                        <RegistrationForm />
-                    )}
-                </div>
-            </div>
+            <Background></Background>                
+                <Content>
+                    <Title>CoSpaces</Title>
+                    <ToggleFormContainer>
+                        <ToggleContainer>
+                            <ToggleText checked={!isRegister}>Login</ToggleText>
+                            <SwitchBox>
+                                <SLiderInputChecked type="checkbox" checked={isRegister} onChange={toggleRegister} />
+                                <Slider />
+                            </SwitchBox>
+                            <ToggleText checked={isRegister}>Register</ToggleText>
+                        </ToggleContainer>
+                        <FormContainer>
+                            {!isRegister ? (
+                                <LoginForm />
+                            ) : (
+                                <RegistrationForm />
+                            )}
+                        </FormContainer>
+                    </ToggleFormContainer>
+                </Content>
+            
         </>
     )
 };
 
 export default LoginRegister;
+
+const Background = styled.div`
+    background-image: url(${backgroundImage}); /* Your image path */
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute; 
+    height: 100vh;
+    width: 100%;
+    opacity: .35;
+    z-index: -1;
+    
+`;
+
+const Content = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8%;
+    z-index: 2;
+    color: white;
+`;
+
+const Title = styled.h1`
+    font-weight: bolder;
+    font-size: 50px;
+    color: #C10000; 
+`;
+
+const ToggleFormContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
+    background-color: rgba(199, 198, 197, .75);
+    padding: 15px;
+    min-height: 45vh;
+    min-width: 35vw;
+`;
+
+const ToggleContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vh;
+`;
+
+const ToggleText = styled.span`
+    font-size: 18px;
+    color: ${props => props.checked ? '#cc4949' : ''};
+    padding: 5px;
+`;
+
+const FormContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
 
 const SwitchBox = styled.label`
     position: relative;

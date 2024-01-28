@@ -1,4 +1,5 @@
 
+import GlobalStyle from "./Global/GlobalStyles";
 import Loading from "./Global/Loading";
 import LoginRegister from "./Authentication/LoginRegister";
 import ModifyReservation from "./Reservation/ModifyReservation";
@@ -13,6 +14,7 @@ import UserHome from "./UserData/UserHome";
 
 
 export {
+    GlobalStyle,
     Loading,
     LoginRegister,
     ModifyReservation,

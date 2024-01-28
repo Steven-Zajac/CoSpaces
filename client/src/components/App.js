@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import {
+    GlobalStyle,
     LoginRegister,
     ModifyReservation,
     NavBar,
@@ -16,6 +17,7 @@ import {
 const App = () => {
     return (
         <Router>
+            <GlobalStyle />
             <NavBar />
             <Routes>
                 <Route path='/' element={<LoginRegister />}/>
