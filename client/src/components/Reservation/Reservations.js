@@ -1,6 +1,6 @@
+import handleNoUser from "../../handlers/handleNoUser";
+import useFetch from "../../hooks/useFetch";
 
-import handleNoUser from "../handlers/handleNoUser";
-import useFetch from "../hooks/useFetch";
 import Loading from "../Global/Loading";
 import SingleReservation from "./SingleReservation";
 

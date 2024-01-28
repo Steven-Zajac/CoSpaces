@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import handleUserLoggedIn from '../handlers/handleUserLoggedIn';
-import handlePostSubmit from '../handlers/handlePostSubmit';
-import useFormData from '../hooks/useFormData';
+import handleUserLoggedIn from '../../handlers/handleUserLoggedIn';
+import handlePostSubmit from '../../handlers/handlePostSubmit';
+import useFormData from '../../hooks/useFormData';
 
 import styled from 'styled-components';
 

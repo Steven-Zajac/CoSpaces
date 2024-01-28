@@ -1,4 +1,4 @@
-import handleDeleteReservation from "../handlers/handleDeleteReservation";
+import handleDeleteReservation from "../../handlers/handleDeleteReservation";
 import styled from "styled-components";
 
 const SingleReservation = ({ resData }) => {

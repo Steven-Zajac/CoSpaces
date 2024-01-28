@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import handleNoUser from '../handlers/handleNoUser';
-import useFetch from '../hooks/useFetch';
+import handleNoUser from '../../handlers/handleNoUser';
+import useFetch from '../../hooks/useFetch';
 import Loading from '../Global/Loading';
 
 const UserHome = () => {

@@ -6,11 +6,10 @@ import Loading from "../Global/Loading";
 import CalendarReservation from "./CalendarReservation";
 import LocationSelect from "./LocationSelect";
 
-import handleNoUser from "../handlers/handleNoUser";
-import handlePostSubmit from "../handlers/handlePostSubmit";
-import useFetch from "../hooks/useFetch";
-import useCalendarData from "../hooks/useCalendarData";
-
+import handleNoUser from "../../handlers/handleNoUser";
+import handlePostSubmit from "../../handlers/handlePostSubmit";
+import useFetch from "../../hooks/useFetch";
+import useCalendarData from "../../hooks/useCalendarData";
 
 const NewReservation = () => {
 

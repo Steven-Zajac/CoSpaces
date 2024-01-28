@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import useLogout from '../hooks/useLogout';
-import { useNavigate } from 'react-router-dom';
+import useLogout from '../../hooks/useLogout';
+//import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
     const userId = localStorage.getItem('userId'); // Checks if logged in 

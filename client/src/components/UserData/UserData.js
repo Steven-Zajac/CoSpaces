@@ -1,13 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import handleNoUser from "../handlers/handleNoUser";
-import handlePatchSubmit from "../handlers/handlePatchSubmit";
+import handleNoUser from "../../handlers/handleNoUser";
+import handlePatchSubmit from '../../handlers/handlePatchSubmit';
 
-import useFetch from "../hooks/useFetch";
-import useFormData from "../hooks/useFormData";
-import useLogout from "../hooks/useLogout";
-import useUserDeletionHandler from "../hooks/useUserDeletionHandler";
+import useFetch from "../../hooks/useFetch";
+import useFormData from "../../hooks/useFormData";
+import useLogout from "../../hooks/useLogout";
+import useUserDeletionHandler from "../../hooks/useUserDeletionHandler";
 
 import Loading from "../Global/Loading";
 

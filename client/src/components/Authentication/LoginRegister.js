@@ -1,9 +1,10 @@
-import styled from "styled-components";
-import backgroundImage from '../../assets/loginpic.avif';
-
 import { useState } from "react";
+
 import RegistrationForm from "./RegistrationForm";
 import LoginForm from "./LoginForm";
+import backgroundImage from '../../assets/loginpic.avif';
+
+import styled from "styled-components";
 
 const LoginRegister = () => {
 

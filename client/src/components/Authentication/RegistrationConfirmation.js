@@ -1,10 +1,10 @@
 import { useParams, NavLink } from "react-router-dom";
 
-import styled from "styled-components";
-
-import useFetch from "../hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
 import Loading from "../Global/Loading";
 import RaiseError from "../Global/RaiseError";
+
+import styled from "styled-components";
 
 const RegistrationConfirmation = () => {
 

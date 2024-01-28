@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+//import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -6,10 +6,10 @@ import Loading from "../Global/Loading";
 import CalendarReservation from "./CalendarReservation";
 import LocationSelect from "./LocationSelect";
 
-import handleNoUser from "../handlers/handleNoUser";
-import handlePatchSubmit from "../handlers/handlePatchSubmit";
-import useFetch from "../hooks/useFetch";
-import useCalendarData from "../hooks/useCalendarData";
+import handleNoUser from "../../handlers/handleNoUser";
+import handlePatchSubmit from "../../handlers/handlePatchSubmit";
+import useFetch from "../../hooks/useFetch";
+import useCalendarData from "../../hooks/useCalendarData";
 
 const ModifyReservation = () => {
 
