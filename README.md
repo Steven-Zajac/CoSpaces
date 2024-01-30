@@ -55,8 +55,3 @@ For support, email me at: zajac.steve.26@gmail.com
 ## License
 
 This project is licensed under the MIT License.
-
-Acknowledgments
-Hat tip to anyone whose code was used
-Inspiration
-etc
